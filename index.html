@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblia Dios Habla Hoy (Audio) - Sitio Oficial</title>
+    <meta
+      name="description"
+      content="Biblia Dios Habla Hoy (Audio) - Lee la Biblia con funciones avanzadas: notas, favoritos, búsqueda sin internet y personalización completa."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #87ceeb 0%, #ffffff 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(135, 206, 235, 0.3);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #87ceeb;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .logo-icon {
+        font-size: 2rem;
+        margin-right: 10px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: #87ceeb;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%;
+        background-color: #87ceeb;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+        left: 0;
+      }
+
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      /* Main Content */
+      main {
+        margin-top: 80px;
+      }
+
+      section {
+        min-height: 100vh;
+        padding: 4rem 0;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Hero Section */
+      .hero {
+        text-align: center;
+        background: linear-gradient(135deg, #87ceeb 0%, #ffffff 100%);
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: #333;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #666;
+        animation: fadeInUp 1s ease 0.3s both;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: #87ceeb;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1s ease 0.6s both;
+        box-shadow: 0 10px 30px rgba(135, 206, 235, 0.4);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(135, 206, 235, 0.6);
+        background: #5fb8e6;
+      }
+
+      /* Features Section */
+      .features {
+        background: #ffffff;
+      }
+
+      .features h2 {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        background: linear-gradient(145deg, #ffffff, #f0f8ff);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(135, 206, 235, 0.1);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(135, 206, 235, 0.3);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #87ceeb;
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .feature-card p {
+        color: #666;
+        line-height: 1.8;
+      }
+
+      /* Legal Sections */
+      .legal-section {
+        background: #ffffff;
+        min-height: auto;
+        padding: 3rem 0;
+      }
+
+      .legal-content {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(135, 206, 235, 0.2);
+      }
+
+      .legal-content h2 {
+        color: #87ceeb;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .legal-content h3 {
+        color: #333;
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem 0;
+      }
+
+      .legal-content p,
+      .legal-content li {
+        margin-bottom: 1rem;
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .legal-content ul {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Footer */
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        color: #87ceeb;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: white;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          position: fixed;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          height: 0;
+          background: rgba(255, 255, 255, 0.95);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+
+        .nav-links.active {
+          height: 100vh;
+          top: 100%;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .features h2 {
+          font-size: 2rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Hide sections by default */
+      .legal-section {
+        display: none;
+      }
+
+      .legal-section.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <a href="#home" class="logo">
+          <span class="logo-icon">📖</span>
+          Biblia Dios Habla Hoy (DHH)
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#" onclick="showSection('terminos')">Términos</a></li>
+          <li>
+            <a href="#" onclick="showSection('privacidad')">Privacidad</a>
+          </li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="container">
+          <h1>Biblia Dios Habla Hoy DHH</h1>
+          <p>La experiencia bíblica más completa en tu dispositivo</p>
+          <a href="#features" class="cta-button"
+            >Descubre las Características</a
+          >
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="container">
+          <h2>Características Principales</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">📚</div>
+              <h3>Lectura Completa</h3>
+              <p>
+                Lee la Biblia completa con una interfaz intuitiva. Selecciona
+                fácilmente el libro y capítulo de tu preferencia para una
+                experiencia de lectura personalizada.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🔍</div>
+              <h3>Búsqueda Avanzada</h3>
+              <p>
+                Encuentra cualquier versículo o tema con nuestro potente
+                buscador avanzado que funciona completamente sin internet.
+                Búsquedas rápidas y precisas.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📝</div>
+              <h3>Notas Personales</h3>
+              <p>
+                Agrega tus propias notas y reflexiones a cualquier versículo.
+                Mantén un registro personal de tu estudio bíblico y crecimiento
+                espiritual.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⭐</div>
+              <h3>Versículos Favoritos</h3>
+              <p>
+                Marca tus versículos favoritos para acceso rápido. Comparte
+                fácilmente tus versículos favoritos o remuévelos cuando desees.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📤</div>
+              <h3>Compartir como Imagen</h3>
+              <p>
+                Comparte versículos como hermosas imágenes en tus redes sociales
+                o con amigos. Diseños elegantes que destacan la palabra de Dios.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🎨</div>
+              <h3>Personalización</h3>
+              <p>
+                Escoge entre diferentes temas para personalizar el color de la
+                app según tu gusto. Ajusta el tamaño de fuente para una lectura
+                cómoda.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📱</div>
+              <h3>Sin Internet</h3>
+              <p>
+                Toda la funcionalidad disponible offline. Lee, busca y estudia
+                la Biblia en cualquier lugar sin necesidad de conexión a
+                internet.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🔤</div>
+              <h3>Fuente Ajustable</h3>
+              <p>
+                Aumenta o disminuye el tamaño de la fuente según tus necesidades
+                para una experiencia de lectura óptima y cómoda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="terminos" class="legal-section">
+        <div class="container">
+          <div class="legal-content">
+            <h2>Términos y Condiciones</h2>
+            <p><strong>Última actualización:</strong> Enero 2025</p>
+
+            <h3>1. Aceptación de los Términos</h3>
+            <p>
+              Al descargar, instalar o usar la aplicación "Biblia Dios Habla Hoy
+              (Audio)", usted acepta estar sujeto a estos Términos y
+              Condiciones. Si no está de acuerdo con estos términos, no use la
+              aplicación.
+            </p>
+
+            <h3>2. Descripción del Servicio</h3>
+            <p>
+              Biblia Dios Habla Hoy (Audio) es una aplicación móvil que
+              proporciona:
+            </p>
+            <ul>
+              <li>
+                Acceso completo al texto bíblico de la versión "Dios Habla Hoy"
+              </li>
+              <li>
+                Funcionalidades de búsqueda avanzada sin conexión a internet
+              </li>
+              <li>Capacidad de agregar notas personales</li>
+              <li>Sistema de marcadores y favoritos</li>
+              <li>Opciones de personalización visual</li>
+              <li>Función para compartir versículos como imágenes</li>
+            </ul>
+
+            <h3>3. Uso Permitido</h3>
+            <p>
+              Esta aplicación está destinada para uso personal, educativo y
+              religioso. Usted se compromete a:
+            </p>
+            <ul>
+              <li>Usar la aplicación de manera respetuosa y apropiada</li>
+              <li>
+                No modificar, descompilar o realizar ingeniería inversa de la
+                aplicación
+              </li>
+              <li>
+                No usar la aplicación para fines comerciales sin autorización
+              </li>
+              <li>Respetar los derechos de autor del contenido bíblico</li>
+            </ul>
+
+            <h3>4. Contenido del Usuario</h3>
+            <p>
+              Las notas personales y marcadores que cree son de su propiedad.
+              Nos reservamos el derecho de eliminar contenido que consideremos
+              inapropiado.
+            </p>
+
+            <h3>5. Limitaciones de Responsabilidad</h3>
+            <p>
+              La aplicación se proporciona "tal como está". No garantizamos que
+              esté libre de errores o interrupciones. No somos responsables por
+              daños derivados del uso de la aplicación.
+            </p>
+
+            <h3>6. Modificaciones</h3>
+            <p>
+              Nos reservamos el derecho de modificar estos términos en cualquier
+              momento. Los cambios entrarán en vigencia al ser publicados en la
+              aplicación.
+            </p>
+
+            <h3>7. Terminación</h3>
+            <p>
+              Podemos terminar su acceso a la aplicación en cualquier momento
+              por violación de estos términos.
+            </p>
+
+            <h3>8. Contacto</h3>
+            <p>
+              Para preguntas sobre estos términos, contáctanos a través de los
+              canales oficiales de la aplicación.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="privacidad" class="legal-section">
+        <div class="container">
+          <div class="legal-content">
+            <h2>Política de Privacidad</h2>
+            <p><strong>Última actualización:</strong> Enero 2025</p>
+
+            <h3>1. Información que Recopilamos</h3>
+            <p>
+              Biblia Dios Habla Hoy (Audio) respeta su privacidad. La aplicación
+              funciona principalmente offline y recopila mínima información:
+            </p>
+            <ul>
+              <li>
+                <strong>Datos de uso local:</strong> Notas personales,
+                marcadores y configuraciones se almacenan localmente en su
+                dispositivo
+              </li>
+              <li>
+                <strong>Información técnica:</strong> Datos básicos del
+                dispositivo para optimizar la aplicación
+              </li>
+              <li>
+                <strong>Datos de crashes:</strong> Información anónima sobre
+                errores para mejorar la estabilidad
+              </li>
+            </ul>
+
+            <h3>2. Cómo Usamos su Información</h3>
+            <p>La información recopilada se utiliza para:</p>
+            <ul>
+              <li>Proporcionar y mejorar los servicios de la aplicación</li>
+              <li>Personalizar su experiencia de uso</li>
+              <li>Solucionar problemas técnicos</li>
+              <li>Desarrollar nuevas características</li>
+            </ul>
+
+            <h3>3. Almacenamiento de Datos</h3>
+            <p>
+              Sus datos personales (notas, favoritos, configuraciones) se
+              almacenan localmente en su dispositivo y no se transmiten a
+              servidores externos.
+            </p>
+
+            <h3>4. Compartir Información</h3>
+            <p>
+              No vendemos, comercializamos ni compartimos su información
+              personal con terceros, excepto:
+            </p>
+            <ul>
+              <li>
+                Cuando usted explícitamente comparte contenido (versículos como
+                imágenes)
+              </li>
+              <li>Cuando sea requerido por ley</li>
+              <li>Para proteger nuestros derechos legales</li>
+            </ul>
+
+            <h3>5. Seguridad de Datos</h3>
+            <p>
+              Implementamos medidas de seguridad para proteger su información:
+            </p>
+            <ul>
+              <li>Almacenamiento local seguro</li>
+              <li>No transmisión de datos personales</li>
+              <li>Actualizaciones regulares de seguridad</li>
+            </ul>
+
+            <h3>6. Sus Derechos</h3>
+            <p>Usted tiene derecho a:</p>
+            <ul>
+              <li>Acceder a sus datos almacenados localmente</li>
+              <li>Modificar o eliminar sus notas y configuraciones</li>
+              <li>Desinstalar la aplicación y eliminar todos los datos</li>
+            </ul>
+
+            <h3>7. Menores de Edad</h3>
+            <p>
+              La aplicación es apta para todas las edades. No recopilamos
+              conscientemente información de menores de 13 años.
+            </p>
+
+            <h3>8. Cambios a esta Política</h3>
+            <p>
+              Podemos actualizar esta política de privacidad ocasionalmente. Le
+              notificaremos sobre cambios significativos a través de la
+              aplicación.
+            </p>
+
+            <h3>9. Contacto</h3>
+            <p>
+              Si tiene preguntas sobre esta política de privacidad, contáctanos
+              a través de los canales oficiales de la aplicación.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <p>
+            &copy; 2025 Biblia Dios Habla Hoy (Audio). Todos los derechos
+            reservados.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="YouTube">📺</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      menuToggle.addEventListener("click", function () {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking on a link
+      navLinks.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        }
+      });
+
+      // Function to show legal sections
+      function showSection(sectionName) {
+        // Hide all sections
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          if (section.classList.contains("legal-section")) {
+            section.classList.remove("active");
+          } else {
+            section.style.display = "none";
+          }
+        });
+
+        // Show the requested section
+        const targetSection = document.getElementById(sectionName);
+        if (targetSection) {
+          targetSection.classList.add("active");
+          targetSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      // Function to go back to main content
+      function showHome() {
+        const sections = document.querySelectorAll("section");
+        sections.forEach((section) => {
+          if (section.classList.contains("legal-section")) {
+            section.classList.remove("active");
+          } else {
+            section.style.display = "flex";
+          }
+        });
+      }
+
+      // Handle navigation clicks
+      document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href === "#home") {
+            e.preventDefault();
+            showHome();
+            document
+              .getElementById("home")
+              .scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      // Header scroll effect
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(255, 255, 255, 0.98)";
+        } else {
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+        }
+      });
+
+      // Animate elements on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = "fadeInUp 0.8s ease forwards";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>
